@@ -18,7 +18,6 @@ namespace Titan.TestCases.Build480
     [TestFixture]
     class Testing : SetupAndTearDown
     {
-        IWebDriver driver;
         private Framework.Logger logger = new Framework.Logger();
         SQLiteUtils sqlUtil = new SQLiteUtils();
         static int RunId;
@@ -58,6 +57,7 @@ namespace Titan.TestCases.Build480
             //Login login = new Login(WebDriverFactory.Driver);
             //login.LoginCustomer("f", "c");
             logger.Info($"HEEEEEEEEEEEEEEEEEEEE");
+            
         }
 
         [Test]

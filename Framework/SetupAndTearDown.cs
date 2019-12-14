@@ -20,7 +20,7 @@ namespace Titan.Framework
         {
             Console.WriteLine("Create Record into SQLiteDB");
             string RunId = TestExecutionContext.CurrentContext.CurrentTest.Parent.Properties.Get("RunId").ToString();
-            TestContext.CurrentContext.Test.Properties.Add("RunId", RunId);
+            TestExecutionContext.CurrentContext.CurrentTest.Properties.Set("RunId", RunId);
             var TestCaseId = TestContext.CurrentContext.Test.Properties.Get("TestCaseId").ToString();
             DBResultMapping initTestRecord = new DBResultMapping
             {
@@ -47,14 +47,15 @@ namespace Titan.Framework
             };
 
             SQLiteUtils.InitRecord(initTestRecord);
-            
+
 
         }
         [TearDown]
         public void TearDown()
         {
             Console.WriteLine("-------- Teardown --------");
-            switch (TestContext.CurrentContext.Result.Outcome.Status) {
+            switch (TestContext.CurrentContext.Result.Outcome.Status)
+            {
                 case TestStatus.Passed:
                     logger.Pass();
                     break;
@@ -63,7 +64,7 @@ namespace Titan.Framework
                     break;
             }
 
-            
+
 
             //WebDriverFactory.CloseAllDrivers();
 

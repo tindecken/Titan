@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using log4net;
-using log4net.Config;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using Titan.Framework.WrapperFactory;
 using Titan.SQLiteDB;
 
 namespace Titan.Framework
@@ -21,7 +14,6 @@ namespace Titan.Framework
     public class Logger
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private IWebDriver driver;
         DBResultMapping dBResultMapping = new DBResultMapping();
         public Logger()
         {
@@ -47,23 +39,37 @@ namespace Titan.Framework
         public void Fail()
         {
             GetTestCaseInfo();
+            // Get call stack
+            StackTrace stackTrace = new StackTrace();
             dBResultMapping.EndTime = DateTime.UtcNow;
-            dBResultMapping.RunFailedMessage = $"{TestContext.CurrentContext.Result.Message} {TestContext.CurrentContext.Result.StackTrace}";
-            Bitmap bmp = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-            byte[] errImgAsByte;
-            using (Graphics g = Graphics.FromImage(bmp))
+            dBResultMapping.RunFailedMessage = $"{DateTime.UtcNow} - [{stackTrace.GetFrame(1).GetMethod().Name}]: {TestContext.CurrentContext.Result.Message} {TestContext.CurrentContext.Result.StackTrace}";
+            if (OperatingSystem.IsWindows())
             {
-                g.CopyFromScreen(0, 0, 0, 0, Screen.PrimaryScreen.Bounds.Size);
-                g.SmoothingMode = SmoothingMode.AntiAlias;
-                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                using (var stream = new MemoryStream())
+                Bitmap bmp = new Bitmap(System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width, System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height);
+                byte[] errImgAsByte;
+                using (Graphics g = Graphics.FromImage(bmp))
                 {
-                    bmp.Save(stream, ImageFormat.Png);
-                    errImgAsByte = stream.ToArray();
+                    g.CopyFromScreen(0, 0, 0, 0, System.Windows.Forms.Screen.PrimaryScreen.Bounds.Size);
+                    g.SmoothingMode = SmoothingMode.AntiAlias;
+                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    using (var stream = new MemoryStream())
+                    {
+                        bmp.Save(stream, ImageFormat.Png);
+                        errImgAsByte = stream.ToArray();
+                    }
                 }
+                if (errImgAsByte == null) return;
+                SQLiteUtils.Fail(dBResultMapping, errImgAsByte);
             }
-            if (errImgAsByte == null) return;
-            SQLiteUtils.Fail(dBResultMapping, errImgAsByte);
+            else if (OperatingSystem.IsLinux()) //Use webdriver for taking screenshot
+            {
+                
+            }
+            else if (OperatingSystem.IsMacOS()) //Use webdriver for taking screenshot
+            {
+                
+            }
+
         }
 
         public void SetTestCaseInfoToLog4Net()

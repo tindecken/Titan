@@ -27,6 +27,9 @@ namespace Titan.Keywords.CustomerSite
         {
             logger.Info("Log from Admin Site");
             driver.Navigate().GoToUrl("https://google.com");
+            logger.Info("Verify true or false");
+            Assert.IsTrue(true);
+            var a = TestContext.CurrentContext.Test.FullName;
         }
     }
 }
