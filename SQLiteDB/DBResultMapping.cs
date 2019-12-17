@@ -12,6 +12,7 @@ namespace Titan.SQLiteDB
         public string BuildName { get; set; }
         public string TestCaseId { get; set; }
         public string TestCaseName { get; set; }
+        public string TestCaseDescription { get; set; }
         public string TestCaseType { get; set; }
         public string TestCaseOwner { get; set; }
         public string TestCaseStatus { get; set; }

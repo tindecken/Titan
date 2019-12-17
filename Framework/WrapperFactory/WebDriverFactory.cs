@@ -44,6 +44,8 @@ namespace Titan.Framework.WrapperFactory
         public static void InitBrowser(string browserName)
         {
             chromeOptions.AddArgument("--window-size=1300,800");
+            chromeOptions.AddExcludedArgument("enable-automation");
+            chromeOptions.AddAdditionalCapability("useAutomationExtension", false);
             switch (browserName)
             {
                 case "Firefox":

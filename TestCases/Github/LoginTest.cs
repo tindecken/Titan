@@ -11,6 +11,7 @@ using Titan.SQLiteDB;
 using SeleniumExtras.PageObjects;
 using System.Threading;
 using Titan.Keywords;
+using Titan.Keywords.Github;
 
 namespace Titan.TestCases.Github
 {
@@ -35,6 +36,7 @@ namespace Titan.TestCases.Github
         }
 
         [Test]
+        [Description("Description of testCase")]
         [Category("ProjectPath")]
         [Author("Tindecken")]
         [TestCaseId("GetSQLiteDBVersion ID")]
@@ -45,16 +47,12 @@ namespace Titan.TestCases.Github
         public void LoginGitHubWithValidInformation()
         {
             WebDriverFactory.InitBrowser("Chrome");
-            Common common = new Common(WebDriverFactory.Driver);
-            HomePage homePage = new HomePage(WebDriverFactory.Driver);
+            CommonKeyword common = new CommonKeyword(WebDriverFactory.Driver);
+            LaunchingPage launchingPage = new LaunchingPage(WebDriverFactory.Driver);
             LoginPage loginPage = new LoginPage(WebDriverFactory.Driver);
             common.GoToUrl("https://github.com");
-            homePage.WEbtnLogin.Click();
-            loginPage.WEinputName.SendKeys("tindecken");
-            loginPage.WEinputPassword.SendKeys("..");
-            loginPage.WEbtnSignIn.Click();
-            Thread.Sleep(5000);
-            Assert.IsTrue(false);
+            launchingPage.GotoLoginPage();
+            loginPage.LoginGithub("tindeckenn", "1@Rivaldo", "" , "Incorrect username or password.");
         }
     }
 }

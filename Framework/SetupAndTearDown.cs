@@ -18,7 +18,6 @@ namespace Titan.Framework
         [SetUp]
         public void Setup()
         {
-            Console.WriteLine("Create Record into SQLiteDB");
             string RunId = TestExecutionContext.CurrentContext.CurrentTest.Parent.Properties.Get("RunId").ToString();
             TestExecutionContext.CurrentContext.CurrentTest.Properties.Set("RunId", RunId);
             var TestCaseId = TestContext.CurrentContext.Test.Properties.Get("TestCaseId").ToString();
@@ -28,6 +27,7 @@ namespace Titan.Framework
                 BuildName = TestContext.CurrentContext.Test.ClassName.Split('.')[2],
                 TestCaseId = TestContext.CurrentContext.Test.Properties.Get("TestCaseId").ToString(),
                 TestCaseName = TestContext.CurrentContext.Test.Name,
+                TestCaseDescription = TestContext.CurrentContext.Test.Properties.Get("Description").ToString(),
                 TestCaseType = TestContext.CurrentContext.Test.Properties.Get("TestCaseType").ToString(),
                 TestCaseOwner = TestContext.CurrentContext.Test.Properties.Get("Author").ToString(),
                 TestCaseStatus = TestContext.CurrentContext.Result.Outcome.Status.ToString(),
@@ -63,17 +63,6 @@ namespace Titan.Framework
                     logger.Fail();
                     break;
             }
-
-
-
-            //WebDriverFactory.CloseAllDrivers();
-
-            //Process[] chromeDriverProcesses = Process.GetProcessesByName("chromedriver");
-
-            //foreach (var chromeDriverProcess in chromeDriverProcesses)
-            //{
-            //    chromeDriverProcess.Kill();
-            //}
         }
     }
 }
