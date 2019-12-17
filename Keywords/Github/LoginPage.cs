@@ -35,6 +35,7 @@ namespace Titan.Keywords.Github
             }
             
             if (!string.IsNullOrEmpty(sErrorMessage)) {
+                logger.Info($"Assert error message");
                 Assert.AreEqual(sErrorMessage, loginObject.sLoginErrorMessage);
             }
             logger.Info("Passed");

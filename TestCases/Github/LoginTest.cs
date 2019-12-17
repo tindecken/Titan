@@ -36,7 +36,7 @@ namespace Titan.TestCases.Github
         }
 
         [Test]
-        [Description("Description of testCase")]
+        [Description("Login to github with valid information")]
         [Category("ProjectPath")]
         [Author("Tindecken")]
         [TestCaseId("GetSQLiteDBVersion ID")]
@@ -52,7 +52,27 @@ namespace Titan.TestCases.Github
             LoginPage loginPage = new LoginPage(WebDriverFactory.Driver);
             common.GoToUrl("https://github.com");
             launchingPage.GotoLoginPage();
-            loginPage.LoginGithub("tindeckenn", "1@Rivaldo", "" , "Incorrect username or password.");
+            loginPage.LoginGithub("tindecken", "1@Rivaldo", "" , "");
+        }
+
+        [Test]
+        [Description("Login to github with invalid information, verify error login message")]
+        [Category("ProjectPath")]
+        [Author("Tindecken")]
+        [TestCaseId("GetSQLiteDBVersion ID")]
+        [TestGroupId("TestGroupId1")]
+        [TestSuiteId("TestSuiteId1")]
+        [RunOwner("Tindecken1")]
+        [TestCaseType("Look")]
+        public void LoginGitHubWithInValidInformation()
+        {
+            WebDriverFactory.InitBrowser("Chrome");
+            CommonKeyword common = new CommonKeyword(WebDriverFactory.Driver);
+            LaunchingPage launchingPage = new LaunchingPage(WebDriverFactory.Driver);
+            LoginPage loginPage = new LoginPage(WebDriverFactory.Driver);
+            common.GoToUrl("https://github.com");
+            launchingPage.GotoLoginPage();
+            loginPage.LoginGithub("tindeckenn", "1@Rivaldo", "", "Incorrect username or password.");
         }
     }
 }
