@@ -9,6 +9,8 @@ using Titan.Framework.WrapperFactory;
 using Titan.PageObjects.Github;
 using Titan.SQLiteDB;
 using SeleniumExtras.PageObjects;
+using System.Threading;
+using Titan.Keywords;
 
 namespace Titan.TestCases.Github
 {
@@ -42,9 +44,17 @@ namespace Titan.TestCases.Github
         [TestCaseType("Look")]
         public void LoginGitHubWithValidInformation()
         {
-            WebDriverFactory.Driver.Url = "https://github.com";
-            HomePage homePage = new HomePage();
-            homePage.WEbtnLogin.
+            WebDriverFactory.InitBrowser("Chrome");
+            Common common = new Common(WebDriverFactory.Driver);
+            HomePage homePage = new HomePage(WebDriverFactory.Driver);
+            LoginPage loginPage = new LoginPage(WebDriverFactory.Driver);
+            common.GoToUrl("https://github.com");
+            homePage.WEbtnLogin.Click();
+            loginPage.WEinputName.SendKeys("tindecken");
+            loginPage.WEinputPassword.SendKeys("..");
+            loginPage.WEbtnSignIn.Click();
+            Thread.Sleep(5000);
+            Assert.IsTrue(false);
         }
     }
 }

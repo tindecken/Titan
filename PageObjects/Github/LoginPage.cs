@@ -8,14 +8,15 @@ namespace Titan.PageObjects.Github
 {
     public class LoginPage
     {
-        private IWebDriver driver;
-        [FindsBy(How = How.Id, Using = "login_field")]
-        public IWebDriver WEinputName { get; set; }
+        private readonly IWebDriver driver;
+        public LoginPage(IWebDriver driver)
+        {
+            this.driver = driver;
+        }
+        public IWebElement WEinputName => driver.FindElement(By.Id("login_field"));
 
-        [FindsBy(How = How.Id, Using = "password")]
-        public IWebDriver WEinputPassword { get; set; }
+        public IWebElement WEinputPassword => driver.FindElement(By.Id("password"));
 
-        [FindsBy(How = How.XPath, Using = "//input[@value='Sign in']")]
-        public IWebDriver WEbtnSignIn { get; set; }
+        public IWebElement WEbtnSignIn => driver.FindElement(By.XPath("//input[@value='Sign in']"));
     }
 }

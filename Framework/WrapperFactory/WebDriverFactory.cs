@@ -15,7 +15,7 @@ namespace Titan.Framework.WrapperFactory
         private static readonly IDictionary<string, IWebDriver> Drivers = new Dictionary<string, IWebDriver>();
         private static IWebDriver driver;
         private static IWebDriver driver2;
-
+        private static ChromeOptions chromeOptions = new ChromeOptions();
        
         public static IWebDriver Driver
         {
@@ -43,6 +43,7 @@ namespace Titan.Framework.WrapperFactory
 
         public static void InitBrowser(string browserName)
         {
+            chromeOptions.AddArgument("--window-size=1300,800");
             switch (browserName)
             {
                 case "Firefox":
@@ -64,7 +65,7 @@ namespace Titan.Framework.WrapperFactory
                 case "Chrome":
                     if (driver == null)
                     {
-                        driver = new ChromeDriver(ProjectConstant.sChromeDriver);
+                        driver = new ChromeDriver(ProjectConstant.sChromeDriver, chromeOptions);
                         Drivers.Add("Chrome", Driver);
                     }
                     break;
