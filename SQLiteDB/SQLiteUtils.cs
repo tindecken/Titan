@@ -59,9 +59,9 @@ namespace Titan.SQLiteDB
             con.Open();
             SQLiteCommand cmd = con.CreateCommand();
             cmd.CommandText = String.Format("INSERT INTO run (RunId, BuildName, TestCaseId, TestCaseName, TestCaseDescription, TestCaseType, TestCaseOwner, TestCaseStatus, RunOwner, RunMachine, " +
-                "StartTime, IsInQueue, TestGroupId, TestGroupName, TestSuiteId, TestSuiteName, RunLog, RunFailedMessage, RunFailedImage, ManualAnalyze, Issue, Comments)" +
+                "StartTime, IsInQueue, Category, TestSuiteName, RunLog, RunFailedMessage, RunFailedImage, ManualAnalyze, Issue, Comments)" +
                 " VALUES (@RunId, @BuildName, @TestCaseId, @TestCaseName, @TestCaseDescription, @TestCaseType, @TestCaseOwner, @TestCaseStatus, @RunOwner, @RunMachine, " +
-                "@StartTime, @IsInQueue, @TestGroupId, @TestGroupName, @TestSuiteId, @TestSuiteName, @RunLog, @RunFailedMessage, @RunFailedImage, @ManualAnalyze, @Issue, @Comments)");
+                "@StartTime, @IsInQueue, @Category, @TestSuiteName, @RunLog, @RunFailedMessage, @RunFailedImage, @ManualAnalyze, @Issue, @Comments)");
             cmd.Parameters.AddWithValue("@RunId", testRecord.RunId);
             cmd.Parameters.AddWithValue("@BuildName", testRecord.BuildName);
             cmd.Parameters.AddWithValue("@TestCaseId", testRecord.TestCaseId);
@@ -74,9 +74,7 @@ namespace Titan.SQLiteDB
             cmd.Parameters.AddWithValue("@RunMachine", testRecord.RunMachine);
             cmd.Parameters.AddWithValue("@StartTime", testRecord.StartTime);
             cmd.Parameters.AddWithValue("@IsInQueue", testRecord.IsInQueue);
-            cmd.Parameters.AddWithValue("@TestGroupId", testRecord.TestGroupId);
-            cmd.Parameters.AddWithValue("@TestGroupName", testRecord.TestGroupName);
-            cmd.Parameters.AddWithValue("@TestSuiteId", testRecord.TestSuiteId);
+            cmd.Parameters.AddWithValue("@Category", testRecord.Category);
             cmd.Parameters.AddWithValue("@TestSuiteName", testRecord.TestSuiteName);
             cmd.Parameters.AddWithValue("@RunLog", "");
             cmd.Parameters.AddWithValue("@RunFailedMessage", testRecord.RunFailedMessage);

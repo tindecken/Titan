@@ -48,8 +48,6 @@ namespace Titan.TestCases.Build480
         [Author("Tindecken")]
         [Property("TestCaseType", "Normal")]
         [Property("TestCaseId", "TestCaseId")]
-        [Property("TestGroupId", "TestGroupId")]
-        [Property("TestSuiteId", "TestSuiteId")]
         [Property("RunOwner", "Tindecken")]
         public void TestLog4NetSQL()
         {
@@ -64,8 +62,6 @@ namespace Titan.TestCases.Build480
         [Category("ProjectPath")]
         [Author("Tindecken")]
         [TestCaseId("GetSQLiteDBVersion ID")]
-        [TestGroupId("TestGroupId1")]
-        [TestSuiteId("TestSuiteId1")]
         [RunOwner("Tindecken1")]
         [TestCaseType("Look")]
         public void GetSQLiteDBVersion() {

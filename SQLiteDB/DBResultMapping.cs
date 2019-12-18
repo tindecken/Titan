@@ -21,9 +21,7 @@ namespace Titan.SQLiteDB
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public Boolean IsInQueue { get; set; }
-        public string TestGroupId { get; set; }
-        public string TestGroupName { get; set; }
-        public string TestSuiteId { get; set; }
+        public string Category { get; set; }
         public string TestSuiteName { get; set; }
         public string RunLog { get; set; }
         public string RunFailedMessage { get; set; }

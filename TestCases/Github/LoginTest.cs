@@ -40,8 +40,6 @@ namespace Titan.TestCases.Github
         [Category("ProjectPath")]
         [Author("Tindecken")]
         [TestCaseId("GetSQLiteDBVersion ID")]
-        [TestGroupId("TestGroupId1")]
-        [TestSuiteId("TestSuiteId1")]
         [RunOwner("Tindecken1")]
         [TestCaseType("Look")]
         public void LoginGitHubWithValidInformation()
@@ -57,11 +55,9 @@ namespace Titan.TestCases.Github
 
         [Test]
         [Description("Login to github with invalid information, verify error login message")]
-        [Category("ProjectPath")]
+        [Category("Github")]
         [Author("Tindecken")]
         [TestCaseId("GetSQLiteDBVersion ID")]
-        [TestGroupId("TestGroupId1")]
-        [TestSuiteId("TestSuiteId1")]
         [RunOwner("Tindecken1")]
         [TestCaseType("Look")]
         public void LoginGitHubWithInValidInformation()
