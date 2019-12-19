@@ -51,7 +51,7 @@ namespace Titan.Framework
         [TearDown]
         public void TearDown()
         {
-            Console.WriteLine("-------- Teardown --------");
+            logger.Info("-------- Teardown --------");
             switch (TestContext.CurrentContext.Result.Outcome.Status)
             {
                 case TestStatus.Passed:
@@ -61,6 +61,9 @@ namespace Titan.Framework
                     logger.Fail();
                     break;
             }
+            //TODO: Get array of Drivers then quit it.
+            WebDriverFactory.Driver.Quit();
+            WebDriverFactory.Driver = null;
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Titan.Framework.WrapperFactory
             {
                 return driver;
             }
-            private set
+            set
             {
                 driver = value;
             }
@@ -65,6 +65,9 @@ namespace Titan.Framework.WrapperFactory
                     break;
 
                 case "Chrome":
+                    if (Drivers.ContainsKey("Chrome")) {
+                        Drivers.Remove("Chrome");
+                    }
                     if (driver == null)
                     {
                         driver = new ChromeDriver(ProjectConstant.sChromeDriver, chromeOptions);
@@ -72,6 +75,10 @@ namespace Titan.Framework.WrapperFactory
                     }
                     break;
                 case "Chrome2":
+                    if (Drivers.ContainsKey("Chrome2"))
+                    {
+                        Drivers.Remove("Chrome2");
+                    }
                     if (driver2 == null)
                     {
                         driver2 = new ChromeDriver(ProjectConstant.sChromeDriver);

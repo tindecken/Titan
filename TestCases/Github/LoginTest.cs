@@ -32,7 +32,6 @@ namespace Titan.TestCases.Github
         [OneTimeTearDown]
         public void ClassTearDown()
         {
-            WebDriverFactory.CloseAllDrivers();
         }
 
         [Test]
@@ -42,6 +41,7 @@ namespace Titan.TestCases.Github
         [TestCaseId("GetSQLiteDBVersion ID")]
         [RunOwner("Tindecken1")]
         [TestCaseType("Look")]
+        [Driver("Chrome")]
         public void LoginGitHubWithValidInformation()
         {
             WebDriverFactory.InitBrowser("Chrome");
@@ -60,6 +60,7 @@ namespace Titan.TestCases.Github
         [TestCaseId("GetSQLiteDBVersion ID")]
         [RunOwner("Tindecken1")]
         [TestCaseType("Look")]
+        [Driver("Chrome")]
         public void LoginGitHubWithInValidInformation()
         {
             WebDriverFactory.InitBrowser("Chrome");
@@ -69,6 +70,34 @@ namespace Titan.TestCases.Github
             common.GoToUrl("https://github.com");
             launchingPage.GotoLoginPage();
             loginPage.LoginGithub("tindeckenn", "1@Rivaldo", "", "Incorrect username or password.");
+        }
+
+        [Test]
+        [Description("Login two times github with valid information")]
+        [Category("ProjectPath")]
+        [Author("Tindecken")]
+        [TestCaseId("Login2TimesGitHubWithValidInformation ID")]
+        [RunOwner("Tindecken1")]
+        [TestCaseType("Look at me")]
+        [Driver("Chrome")]
+        [Driver("Chrome2")]
+        public void Login2TimesGitHubWithValidInformation()
+        {
+            WebDriverFactory.InitBrowser("Chrome");
+            WebDriverFactory.InitBrowser("Chrome2");
+            CommonKeyword common = new CommonKeyword(WebDriverFactory.Driver);
+            LaunchingPage launchingPage = new LaunchingPage(WebDriverFactory.Driver);
+            LoginPage loginPage = new LoginPage(WebDriverFactory.Driver);
+            common.GoToUrl("https://github.com");
+            launchingPage.GotoLoginPage();
+            loginPage.LoginGithub("tindecken", "1@Rivaldo", "", "");
+
+            CommonKeyword common2 = new CommonKeyword(WebDriverFactory.Driver2);
+            LaunchingPage launchingPage2 = new LaunchingPage(WebDriverFactory.Driver2);
+            LoginPage loginPage2 = new LoginPage(WebDriverFactory.Driver2);
+            common2.GoToUrl("https://github.com");
+            launchingPage2.GotoLoginPage();
+            loginPage2.LoginGithub("tindecken", "1@Rivaldo", "", "");
         }
     }
 }
