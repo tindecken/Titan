@@ -41,13 +41,13 @@ namespace Titan.TestCases.Github
         [TestCaseId("GetSQLiteDBVersion ID")]
         [RunOwner("Tindecken1")]
         [TestCaseType("Look")]
-        [Driver("Chrome")]
+        [Driver("Chrome1")]
         public void LoginGitHubWithValidInformation()
         {
-            WebDriverFactory.InitBrowser("Chrome");
-            CommonKeyword common = new CommonKeyword(WebDriverFactory.Driver);
-            LaunchingPage launchingPage = new LaunchingPage(WebDriverFactory.Driver);
-            LoginPage loginPage = new LoginPage(WebDriverFactory.Driver);
+            WebDriverFactory.InitBrowser("Chrome1");
+            CommonKeyword common = new CommonKeyword(WebDriverFactory.Driver1);
+            LaunchingPage launchingPage = new LaunchingPage(WebDriverFactory.Driver1);
+            LoginPage loginPage = new LoginPage(WebDriverFactory.Driver1);
             common.GoToUrl("https://github.com");
             launchingPage.GotoLoginPage();
             loginPage.LoginGithub("tindecken", "1@Rivaldo", "" , "");
@@ -60,13 +60,13 @@ namespace Titan.TestCases.Github
         [TestCaseId("GetSQLiteDBVersion ID")]
         [RunOwner("Tindecken1")]
         [TestCaseType("Look")]
-        [Driver("Chrome")]
+        [Driver("Chrome1")]
         public void LoginGitHubWithInValidInformation()
         {
-            WebDriverFactory.InitBrowser("Chrome");
-            CommonKeyword common = new CommonKeyword(WebDriverFactory.Driver);
-            LaunchingPage launchingPage = new LaunchingPage(WebDriverFactory.Driver);
-            LoginPage loginPage = new LoginPage(WebDriverFactory.Driver);
+            WebDriverFactory.InitBrowser("Chrome1");
+            CommonKeyword common = new CommonKeyword(WebDriverFactory.Driver1);
+            LaunchingPage launchingPage = new LaunchingPage(WebDriverFactory.Driver1);
+            LoginPage loginPage = new LoginPage(WebDriverFactory.Driver1);
             common.GoToUrl("https://github.com");
             launchingPage.GotoLoginPage();
             loginPage.LoginGithub("tindeckenn", "1@Rivaldo", "", "Incorrect username or password.");
@@ -79,15 +79,16 @@ namespace Titan.TestCases.Github
         [TestCaseId("Login2TimesGitHubWithValidInformation ID")]
         [RunOwner("Tindecken1")]
         [TestCaseType("Look at me")]
-        [Driver("Chrome")]
+        [Driver("Chrome1")]
         [Driver("Chrome2")]
+        [IsDebug(true)]
         public void Login2TimesGitHubWithValidInformation()
         {
-            WebDriverFactory.InitBrowser("Chrome");
+            WebDriverFactory.InitBrowser("Chrome1");
             WebDriverFactory.InitBrowser("Chrome2");
-            CommonKeyword common = new CommonKeyword(WebDriverFactory.Driver);
-            LaunchingPage launchingPage = new LaunchingPage(WebDriverFactory.Driver);
-            LoginPage loginPage = new LoginPage(WebDriverFactory.Driver);
+            CommonKeyword common = new CommonKeyword(WebDriverFactory.Driver1);
+            LaunchingPage launchingPage = new LaunchingPage(WebDriverFactory.Driver1);
+            LoginPage loginPage = new LoginPage(WebDriverFactory.Driver1);
             common.GoToUrl("https://github.com");
             launchingPage.GotoLoginPage();
             loginPage.LoginGithub("tindecken", "1@Rivaldo", "", "");

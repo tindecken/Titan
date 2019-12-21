@@ -13,19 +13,20 @@ namespace Titan.Framework.WrapperFactory
     class WebDriverFactory
     {
         private static readonly IDictionary<string, IWebDriver> Drivers = new Dictionary<string, IWebDriver>();
-        private static IWebDriver driver;
+        private static IWebDriver driver1;
         private static IWebDriver driver2;
+        private static IWebDriver driver3;
         private static ChromeOptions chromeOptions = new ChromeOptions();
        
-        public static IWebDriver Driver
+        public static IWebDriver Driver1
         {
             get
             {
-                return driver;
+                return driver1;
             }
             set
             {
-                driver = value;
+                driver1 = value;
             }
         }
 
@@ -35,9 +36,21 @@ namespace Titan.Framework.WrapperFactory
             {
                 return driver2;
             }
-            private set
+            set
             {
                 driver2 = value;
+            }
+        }
+
+        public static IWebDriver Driver3
+        {
+            get
+            {
+                return driver3;
+            }
+            set
+            {
+                driver3 = value;
             }
         }
 
@@ -49,29 +62,29 @@ namespace Titan.Framework.WrapperFactory
             switch (browserName)
             {
                 case "Firefox":
-                    if (Driver == null)
+                    if (Driver1 == null)
                     {
-                        driver = new FirefoxDriver();
-                        Drivers.Add("Firefox", Driver);
+                        driver1 = new FirefoxDriver();
+                        Drivers.Add("Firefox", Driver1);
                     }
                     break;
 
                 case "IE":
-                    if (Driver == null)
+                    if (Driver1 == null)
                     {
-                        driver = new InternetExplorerDriver(@"C:\PathTo\IEDriverServer");
-                        Drivers.Add("IE", Driver);
+                        driver1 = new InternetExplorerDriver(@"C:\PathTo\IEDriverServer");
+                        Drivers.Add("IE", Driver1);
                     }
                     break;
 
-                case "Chrome":
-                    if (Drivers.ContainsKey("Chrome")) {
-                        Drivers.Remove("Chrome");
+                case "Chrome1":
+                    if (Drivers.ContainsKey("Chrome1")) {
+                        Drivers.Remove("Chrome1");
                     }
-                    if (driver == null)
+                    if (driver1 == null)
                     {
-                        driver = new ChromeDriver(ProjectConstant.sChromeDriver, chromeOptions);
-                        Drivers.Add("Chrome", Driver);
+                        driver1 = new ChromeDriver(ProjectConstant.sChromeDriver, chromeOptions);
+                        Drivers.Add("Chrome1", Driver1);
                     }
                     break;
                 case "Chrome2":
@@ -81,17 +94,24 @@ namespace Titan.Framework.WrapperFactory
                     }
                     if (driver2 == null)
                     {
-                        driver2 = new ChromeDriver(ProjectConstant.sChromeDriver);
+                        driver2 = new ChromeDriver(ProjectConstant.sChromeDriver, chromeOptions);
                         Drivers.Add("Chrome2", Driver2);
+                    }
+                    break;
+                case "Chrome3":
+                    if (Drivers.ContainsKey("Chrome3"))
+                    {
+                        Drivers.Remove("Chrome3");
+                    }
+                    if (driver3 == null)
+                    {
+                        driver3 = new ChromeDriver(ProjectConstant.sChromeDriver, chromeOptions);
+                        Drivers.Add("Chrome3", Driver3);
                     }
                     break;
             }
         }
 
-        public static void LoadApplication(string url)
-        {
-            Driver.Url = url;
-        }
 
         public static void CloseAllDrivers()
         {

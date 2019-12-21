@@ -9,6 +9,7 @@ using Titan.Framework.WrapperFactory;
 using Titan.SQLiteDB;
 using NUnit.Framework.Interfaces;
 using System.Diagnostics;
+using System.Collections;
 
 namespace Titan.Framework
 {
@@ -61,9 +62,30 @@ namespace Titan.Framework
                     logger.Fail();
                     break;
             }
-            //TODO: Get array of Drivers then quit it.
-            WebDriverFactory.Driver.Quit();
-            WebDriverFactory.Driver = null;
+            bool isDebug = (bool)TestContext.CurrentContext.Test.Properties.Get("IsDebug");
+            if (isDebug) return;
+            IList lstDriverName = (IList)TestContext.CurrentContext.Test.Properties["Driver"];
+            foreach (string dv in lstDriverName)
+            {
+                logger.Info("Driver: " + dv);
+                switch (dv[dv.Length - 1])
+                {
+                    case '1':
+                        WebDriverFactory.Driver1.Quit();
+                        WebDriverFactory.Driver1 = null;
+                        break;
+                    case '2':
+                        WebDriverFactory.Driver2.Quit();
+                        WebDriverFactory.Driver2 = null;
+                        break;
+                    case '3':
+                        WebDriverFactory.Driver3.Quit();
+                        WebDriverFactory.Driver3 = null;
+                        break;
+
+                }
+
+            }
         }
     }
 }

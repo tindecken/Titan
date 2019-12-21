@@ -92,7 +92,7 @@ namespace Titan.SQLiteDB
             SQLiteConnection con = new SQLiteConnection(cs);
             con.Open();
             SQLiteCommand cmd = con.CreateCommand();
-            cmd.CommandText = String.Format("UPDATE run SET TestCaseStatus = @TestCaseStatus, EndTime = @EndTime, RunLog = RunLog || @PassedMessage WHERE RunId = @RunId AND TestCaseName = @TestCaseName");
+            cmd.CommandText = String.Format("UPDATE run SET TestCaseStatus = @TestCaseStatus, EndTime = @EndTime, RunLog = RunLog || @PassedMessage || char(10) WHERE RunId = @RunId AND TestCaseName = @TestCaseName");
             cmd.Parameters.AddWithValue("@RunId", testRecord.RunId);
             cmd.Parameters.AddWithValue("@TestCaseName", testRecord.TestCaseName);
             cmd.Parameters.AddWithValue("@TestCaseStatus", testRecord.TestCaseStatus);
