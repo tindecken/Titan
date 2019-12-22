@@ -45,7 +45,7 @@
     <None Update="Framework\WrapperFactory\chromedriver.exe">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Update="SQLiteDB\result.db">
+    <None Update="Framework\SQLiteDB\result.db">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
   </ItemGroup>
