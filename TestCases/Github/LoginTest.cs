@@ -42,6 +42,7 @@ namespace Titan.TestCases.Github
         [RunOwner("Tindecken1")]
         [TestCaseType("Look")]
         [Driver("Chrome1")]
+        [IsDebug(false)]
         public void LoginGitHubWithValidInformation()
         {
             WebDriverFactory.InitBrowser("Chrome1");
@@ -61,6 +62,7 @@ namespace Titan.TestCases.Github
         [RunOwner("Tindecken1")]
         [TestCaseType("Look")]
         [Driver("Chrome1")]
+        [IsDebug(true)]
         public void LoginGitHubWithInValidInformation()
         {
             WebDriverFactory.InitBrowser("Chrome1");
@@ -81,7 +83,7 @@ namespace Titan.TestCases.Github
         [TestCaseType("Look at me")]
         [Driver("Chrome1")]
         [Driver("Chrome2")]
-        [IsDebug(true)]
+        [IsDebug(false)]
         public void Login2TimesGitHubWithValidInformation()
         {
             WebDriverFactory.InitBrowser("Chrome1");

@@ -55,6 +55,8 @@ namespace Titan.SQLiteDB
 
         public static void InitRecord(DBResultMapping testRecord)
         {
+            
+
             SQLiteConnection con = new SQLiteConnection(cs);
             con.Open();
             SQLiteCommand cmd = con.CreateCommand();
@@ -76,14 +78,14 @@ namespace Titan.SQLiteDB
             cmd.Parameters.AddWithValue("@IsInQueue", testRecord.IsInQueue);
             cmd.Parameters.AddWithValue("@Category", testRecord.Category);
             cmd.Parameters.AddWithValue("@TestSuiteName", testRecord.TestSuiteName);
-            cmd.Parameters.AddWithValue("@RunLog", "");
+            cmd.Parameters.AddWithValue("@RunLog", testRecord.RunLog);
             cmd.Parameters.AddWithValue("@RunFailedMessage", testRecord.RunFailedMessage);
             cmd.Parameters.AddWithValue("@RunFailedImage", testRecord.RunFailedImage);
             cmd.Parameters.AddWithValue("@ManualAnalyze", testRecord.ManualAnalyze);
             cmd.Parameters.AddWithValue("@Issue", testRecord.Issue);
             cmd.Parameters.AddWithValue("@Comments", testRecord.Comments);
             cmd.Prepare();
-            object result = cmd.ExecuteNonQuery();
+            cmd.ExecuteNonQuery();
             con.Close();
         }
 

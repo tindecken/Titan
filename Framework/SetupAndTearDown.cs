@@ -33,6 +33,7 @@ namespace Titan.Framework
                 TestCaseOwner = TestContext.CurrentContext.Test.Properties.Get("Author").ToString(),
                 TestCaseStatus = TestContext.CurrentContext.Result.Outcome.Status.ToString(),
                 RunOwner = TestContext.CurrentContext.Test.Properties.Get("RunOwner").ToString(),
+                IsDebug = (bool)TestContext.CurrentContext.Test.Properties.Get("IsDebug"),
                 RunMachine = Environment.MachineName,
                 StartTime = DateTime.UtcNow,
                 IsInQueue = false,
@@ -45,14 +46,32 @@ namespace Titan.Framework
                 Comments = "",
             };
 
+            //TestCase Info
+            initTestRecord.RunLog = $"{DateTime.UtcNow} - [Setup]: -------- Setup --------";
+            initTestRecord.RunLog += "\nTest Case attributes:";
+            IList<string> lstPros = TestContext.CurrentContext.Test.Properties.Keys.ToList<string>();
+            foreach (var key in lstPros)
+            {
+                if (!key.Contains("Driver")) //Driver attribute is multiple, so need to get list of it before action
+                {
+                    initTestRecord.RunLog += $"\n[{key}]: {TestContext.CurrentContext.Test.Properties.Get(key)}";
+                }
+                else {
+                    IList lstDriver = (IList)TestContext.CurrentContext.Test.Properties["Driver"];
+                    foreach (string driver in lstDriver) {
+                        initTestRecord.RunLog += $"\n[{key}]: {driver}";
+                    }
+                }
+                
+            }
+            if (initTestRecord.IsDebug) initTestRecord.RunLog += "\n[Warning] TestCase is used DEBUG mode, so, the orthers can't init new WebDriver, it means can't run, and you must close manually Web Browser and webdriver process in TaskManager.";
+            initTestRecord.RunLog += "\n";
             SQLiteUtils.InitRecord(initTestRecord);
-
-
         }
         [TearDown]
         public void TearDown()
         {
-            logger.Info("-------- Teardown --------");
+            logger.Info($"-------- Teardown --------");
             switch (TestContext.CurrentContext.Result.Outcome.Status)
             {
                 case TestStatus.Passed:
