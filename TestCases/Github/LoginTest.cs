@@ -43,6 +43,7 @@ namespace Titan.TestCases.Github
         [TestCaseType("Look")]
         [Driver("Chrome1")]
         [IsDebug(false)]
+        [WorkItem("https://vnexpress.net")]
         public void LoginGitHubWithValidInformation()
         {
             WebDriverFactory.InitBrowser("Chrome1");
@@ -63,6 +64,7 @@ namespace Titan.TestCases.Github
         [TestCaseType("Look")]
         [Driver("Chrome1")]
         [IsDebug(true)]
+        [WorkItem("https://vnexpress.net")]
         public void LoginGitHubWithInValidInformation()
         {
             WebDriverFactory.InitBrowser("Chrome1");
@@ -84,6 +86,7 @@ namespace Titan.TestCases.Github
         [Driver("Chrome1")]
         [Driver("Chrome2")]
         [IsDebug(false)]
+        [WorkItem("https://vnexpress.net")]
         public void Login2TimesGitHubWithValidInformation()
         {
             WebDriverFactory.InitBrowser("Chrome1");

@@ -33,6 +33,7 @@ namespace Titan.Framework
                 TestCaseOwner = TestContext.CurrentContext.Test.Properties.Get("Author").ToString(),
                 TestCaseStatus = TestContext.CurrentContext.Result.Outcome.Status.ToString(),
                 RunOwner = TestContext.CurrentContext.Test.Properties.Get("RunOwner").ToString(),
+                WorkItem = TestContext.CurrentContext.Test.Properties.Get("WorkItem").ToString(),
                 IsDebug = (bool)TestContext.CurrentContext.Test.Properties.Get("IsDebug"),
                 RunMachine = Environment.MachineName,
                 StartTime = DateTime.UtcNow,

@@ -61,9 +61,9 @@ namespace Titan.SQLiteDB
             con.Open();
             SQLiteCommand cmd = con.CreateCommand();
             cmd.CommandText = String.Format("INSERT INTO run (RunId, BuildName, TestCaseId, TestCaseName, TestCaseDescription, TestCaseType, TestCaseOwner, TestCaseStatus, RunOwner, RunMachine, " +
-                "StartTime, IsInQueue, Category, TestSuiteName, RunLog, RunFailedMessage, RunFailedImage, ManualAnalyze, Issue, Comments)" +
+                "StartTime, IsInQueue, Category, TestSuiteName, RunLog, RunFailedMessage, RunFailedImage, ManualAnalyze, Issue, Comments, WorkItem)" +
                 " VALUES (@RunId, @BuildName, @TestCaseId, @TestCaseName, @TestCaseDescription, @TestCaseType, @TestCaseOwner, @TestCaseStatus, @RunOwner, @RunMachine, " +
-                "@StartTime, @IsInQueue, @Category, @TestSuiteName, @RunLog, @RunFailedMessage, @RunFailedImage, @ManualAnalyze, @Issue, @Comments)");
+                "@StartTime, @IsInQueue, @Category, @TestSuiteName, @RunLog, @RunFailedMessage, @RunFailedImage, @ManualAnalyze, @Issue, @Comments, @WorkItem)");
             cmd.Parameters.AddWithValue("@RunId", testRecord.RunId);
             cmd.Parameters.AddWithValue("@BuildName", testRecord.BuildName);
             cmd.Parameters.AddWithValue("@TestCaseId", testRecord.TestCaseId);
@@ -84,6 +84,7 @@ namespace Titan.SQLiteDB
             cmd.Parameters.AddWithValue("@ManualAnalyze", testRecord.ManualAnalyze);
             cmd.Parameters.AddWithValue("@Issue", testRecord.Issue);
             cmd.Parameters.AddWithValue("@Comments", testRecord.Comments);
+            cmd.Parameters.AddWithValue("@WorkItem", testRecord.WorkItem);
             cmd.Prepare();
             cmd.ExecuteNonQuery();
             con.Close();
